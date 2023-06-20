@@ -1,10 +1,7 @@
 apiVersion: v1
-data:
-  sample.conf: |
-    This is my configuration file for Node_app
-kind: ConfigMap
+kind: Secret
 metadata:
-  name: myapp
+  name: testsecret
   namespace: pranit-ns
 ---
 apiVersion: apps/v1
@@ -30,16 +27,12 @@ spec:
         ports:
         - containerPort: 3000
         volumeMounts:
-          - name: testconfigmap
-            mountPath: "/tmp/config" 
+          - name: testsecret
+            mountPath: "/tmp/mysecrets" 
       volumes:
-      - name: testconfigmap
-        configMap:
-          name: myapp   
-          items:
-          - key: sample.conf
-            path: sample.conf
-        
+      - name: testsecret
+        secret:
+          secretName: mysecret
         
 ---
 
