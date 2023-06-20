@@ -1,5 +1,8 @@
 apiVersion: v1
 kind: Secret
+data:
+  username: root
+  password: mypassword123
 metadata:
   name: testsecret
   namespace: pranit-ns
